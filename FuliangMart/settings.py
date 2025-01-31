@@ -24,27 +24,25 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(os.path.join(BASE_DIR/ ".env", ".env"))
+# load_dotenv(os.path.join(BASE_DIR/ ".env", ".env"))
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+# SECRET_KEY = os.environ.get("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG")
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = os.environ.get("DEBUG")
 
-# ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
-# ALLOWED_HOSTS += os.environ.get("ALLOWED_HOSTS", "").split()
+# # ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+# # ALLOWED_HOSTS += os.environ.get("ALLOWED_HOSTS", "").split()
 
-
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
-
-# Only append to ALLOWED_HOSTS if the environment variable is set
-env_allowed_hosts = os.environ.get("ALLOWED_HOSTS")
-if env_allowed_hosts:
-    ALLOWED_HOSTS += env_allowed_hosts.split()
+# Access the environment variables
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG') == 'True'  # Ensuring it's treated as a boolean
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
 # Application definition
 
